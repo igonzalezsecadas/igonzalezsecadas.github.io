@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ignacio Gonzalez Secadas — Architectural Dark</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Jost:wght@300;400;500&display=swap');
+
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+  :root{--bg:#0c0c0e;--fg:#c5c1b8;--accent:#c9a84c;--dim:#222225;--muted:#5c5c62;--glow:rgba(201,168,78,0.06)}
+
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  /* Concrete texture + ambient light */
+  body::before {
+    content:'';
+    position:fixed;
+    inset:0;
+    background:
+      url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"),
+      radial-gradient(ellipse at 20% 30%, var(--glow) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, var(--glow) 0%, transparent 40%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* Architectural grid overlay */
+  .grid-overlay {
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+    background-image:
+      linear-gradient(rgba(201,168,78,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,78,0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  .hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:6rem 5rem;
+    position:relative;
+    z-index:2;
+  }
+
+  /* Vertical brass light line */
+  .hero::before{
+    content:'';
+    position:absolute;
+    left:5rem;top:50%;
+    width:1px;height:250px;
+    background:linear-gradient(to bottom,transparent,var(--accent),var(--accent),transparent);
+    transform:translateY(-50%);
+    opacity:0.6;
+  }
+
+  /* Horizontal light glow behind name */
+  .hero::after {
+    content:'';
+    position:absolute;
+    top:35%;left:15%;
+    width:500px;height:200px;
+    background:radial-gradient(ellipse,var(--glow) 0%,transparent 70%);
+    pointer-events:none;
+    z-index:-1;
+  }
+
+  .hero-content{
+    max-width:850px;
+    margin-left:5rem;
+    position:relative;
+  }
+
+  /* Section marker */
+  .section-marker {
+    position:absolute;
+    left:-3.5rem;
+    top:0.3rem;
+    font-family:'Cinzel',serif;
+    font-size:0.55rem;
+    letter-spacing:0.4em;
+    color:var(--accent);
+    writing-mode:vertical-rl;
+    text-orientation:mixed;
+    opacity:0.7;
+  }
+
+  .hero-tag{
+    font-size:0.6rem;letter-spacing:0.4em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:3.5rem;
+    font-weight:400;
+    position:relative;
+    display:inline-block;
+  }
+  .hero-tag::after {
+    content:'';
+    position:absolute;
+    bottom:-0.8rem;left:0;
+    width:30px;height:1px;
+    background:var(--accent);
+  }
+
+  .hero-content h1{
+    font-family:'Cinzel',serif;
+    font-size:clamp(3rem,6.5vw,5.5rem);
+    font-weight:400;
+    line-height:1.1;
+    letter-spacing:0.04em;
+    margin-bottom:3.5rem;
+  }
+  .hero-content h1 strong{font-weight:700;display:block;letter-spacing:0.06em}
+
+  .hero-roles{
+    display:flex;gap:4rem;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--muted);
+    position:relative;
+  }
+  .hero-roles::before {
+    content:'';
+    position:absolute;
+    top:-1.5rem;left:0;
+    width:60px;height:1px;
+    background:var(--dim);
+  }
+  .hero-roles span{position:relative;transition:color 0.4s ease}
+  .hero-roles span:hover { color:var(--accent); }
+  .hero-roles span::after{content:'/';position:absolute;right:-2.2rem;color:var(--dim)}
+  .hero-roles span:last-child::after{display:none}
+
+  .about{
+    padding:7rem 5rem;
+    max-width:950px;
+    margin:0 auto;
+    border-top:1px solid var(--dim);
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:4rem;
+  }
+
+  .about h2{
+    font-family:'Cinzel',serif;
+    font-size:2rem;font-weight:400;line-height:1.35;
+    margin-bottom:2.5rem;color:var(--accent);
+    grid-column:1 / -1;
+    position:relative;
+    padding-bottom:1.5rem;
+  }
+  .about h2::after {
+    content:'';
+    position:absolute;
+    bottom:0;left:0;
+    width:50px;height:1px;
+    background:var(--accent);
+    opacity:0.5;
+  }
+
+  .about-grid p{font-size:0.95rem;line-height:1.95;color:var(--muted)}
+  .about-grid .highlight{color:var(--fg);font-weight:400;position:relative}
+  .about-grid .highlight::after {
+    content:'';
+    position:absolute;
+    bottom:-2px;left:0;
+    width:100%;height:1px;
+    background:var(--accent);
+    opacity:0.3;
+  }
+
+  /* Blueprint corner marks */
+  .corner-mark {
+    position:absolute;
+    width:30px;height:30px;
+    border-color:var(--dim);
+    border-style:solid;
+    opacity:0.5;
+  }
+  .corner-mark.tl { top:2rem;left:2rem; border-width:1px 0 0 1px; }
+  .corner-mark.tr { top:2rem;right:2rem; border-width:1px 1px 0 0; }
+  .corner-mark.bl { bottom:2rem;left:2rem; border-width:0 0 1px 1px; }
+  .corner-mark.br { bottom:2rem;right:2rem; border-width:0 1px 1px 0; }
+
+  /* Scroll indicator */
+  .scroll-line {
+    position:absolute;
+    bottom:3rem;
+    right:5rem;
+    width:1px;
+    height:80px;
+    background:linear-gradient(to bottom, var(--dim), transparent);
+  }
+  .scroll-line::after {
+    content:'';
+    position:absolute;
+    bottom:0;left:-2px;
+    width:5px;height:5px;
+    background:var(--accent);
+    border-radius:50%;
+    animation:scroll-pulse 2s ease-in-out infinite;
+  }
+  @keyframes scroll-pulse {
+    0%,100% { opacity:0.4; transform:scale(1); }
+    50% { opacity:1; transform:scale(1.3); }
+  }
+
+  @media(max-width:768px){
+    .hero{padding:3rem 2rem}
+    .hero::before{left:1.5rem}
+    .hero-content{margin-left:3rem}
+    .section-marker { display:none; }
+    .about{padding:4rem 2rem;grid-template-columns:1fr}
+    .corner-mark { display:none; }
+    .scroll-line { display:none; }
+  }
+</style>
+</head>
+<body>
+  <div class="grid-overlay"></div>
+
+  <section class="hero">
+    <div class="corner-mark tl"></div>
+    <div class="corner-mark tr"></div>
+    <div class="corner-mark bl"></div>
+    <div class="corner-mark br"></div>
+
+    <div class="hero-content">
+      <div class="section-marker">Portfolio</div>
+      <p class="hero-tag">Portfolio · Twenty Twenty-Six</p>
+      <h1><strong>Ignacio Gonzalez</strong> Secadas</h1>
+      <div class="hero-roles">
+        <span>Software Developer</span>
+        <span>Systems Thinker</span>
+      </div>
+    </div>
+    <div class="scroll-line"></div>
+  </section>
+
+  <section class="about">
+    <h2>Precision is the foundation.<br>Everything else follows.</h2>
+    <div class="about-grid">
+      <p>I build <span class="highlight">compilers, distributed systems, and developer tools</span> — the infrastructure that other software relies on. Every abstraction is a liability until proven otherwise.</p>
+    </div>
+    <div class="about-grid">
+      <p>My approach: <span class="highlight">rigorous design, clean architecture, relentless simplification</span>. The best systems aren't the ones with the most features — they're the ones where every piece justifies its existence.</p>
+    </div>
+  </section>
+</body>
+</html>
