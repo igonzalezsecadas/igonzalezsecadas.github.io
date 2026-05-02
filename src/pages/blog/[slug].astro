@@ -1,0 +1,197 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={`${post.data.title} — Ignacio Gonzalez Secadas`} description={post.data.description}>
+  <main>
+    <article class="blog-post">
+      <div class="post-header">
+        <a href="/" class="back-link">← Back to home</a>
+        <time datetime={post.data.date.toISOString()}>
+          {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </time>
+        <h1>{post.data.title}</h1>
+        {post.data.tags && post.data.tags.length > 0 && (
+          <div class="post-tags">
+            {post.data.tags.map((tag) => <span>{tag}</span>)}
+          </div>
+        )}
+      </div>
+
+      <div class="post-content">
+        <Content />
+      </div>
+    </article>
+
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+  .blog-post {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 6rem 2rem 4rem;
+  }
+
+  .post-header {
+    margin-bottom: 3rem;
+    border-bottom: var(--border);
+    padding-bottom: 2rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    color: var(--fg);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.4;
+    margin-bottom: 2rem;
+    transition: color 0.2s, opacity 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+    opacity: 1;
+  }
+
+  .post-header time {
+    display: block;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.4;
+    margin-bottom: 1rem;
+  }
+
+  .post-header h1 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+
+  .post-tags {
+    display: flex;
+    gap: 0.2rem 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .post-tags span {
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    opacity: 0.5;
+  }
+
+  .post-tags span:not(:last-child)::after {
+    content: '/';
+    margin-left: 0.6rem;
+    opacity: 0.3;
+  }
+
+  /* ── Prose styles ── */
+  .post-content {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .post-content :global(h2) {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .post-content :global(h3) {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.01em;
+  }
+
+  .post-content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .post-content :global(strong) {
+    color: var(--accent);
+  }
+
+  .post-content :global(code) {
+    background: var(--dim);
+    padding: 0.15rem 0.4rem;
+    font-size: 0.85rem;
+    border: 1px solid var(--dim);
+  }
+
+  .post-content :global(pre) {
+    background: var(--dimmer);
+    border: var(--border);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+  }
+
+  .post-content :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .post-content :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .post-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .post-content :global(blockquote) {
+    border-left: 4px solid var(--accent);
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .blog-post {
+      padding: 5rem 1.2rem 3rem;
+    }
+
+    .post-header h1 {
+      font-size: 1.5rem;
+    }
+  }
+</style>

@@ -1,0 +1,192 @@
+/* ═══════════════════════════════════════════
+   GLOBAL CSS — Brutalist Portfolio
+   ═══════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Syne:wght@400..800&display=swap');
+
+/* ── RESET ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── CUSTOM PROPERTIES ── */
+:root {
+  --bg: #0d0d0b;
+  --fg: #e8e6e1;
+  --accent: #20c997;
+  --dim: #1c1c18;
+  --dimmer: #141410;
+  --border: 3px solid var(--fg);
+  --font-mono: 'Fragment Mono', monospace;
+  --font-heading: 'Syne', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  line-height: 1.45;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ── */
+.cursor {
+  position: fixed;
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 10000;
+  mix-blend-mode: difference;
+  transition: transform 0.15s ease, width 0.2s, height 0.2s;
+  transform: translate(-50%, -50%);
+}
+
+.cursor.hover {
+  width: 28px;
+  height: 28px;
+  background: var(--fg);
+}
+
+.cursor-trail {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--accent);
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s;
+  transform: translate(-50%, -50%);
+  opacity: 0.5;
+}
+
+/* Hide cursor on touch devices */
+@media (hover: none) {
+  .cursor,
+  .cursor-trail {
+    display: none;
+  }
+  body {
+    cursor: auto;
+  }
+}
+
+/* ── CRT SCANLINE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.35;
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.45s; }
+
+/* ── BLINK ANIMATION ── */
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* ── TOUCH DEVICE: DISABLE ALL HOVER EFFECTS ── */
+@media (hover: none) {
+  /* Disable glitch pseudo-elements */
+  .hero-name h1 .last:hover::before,
+  .hero-name h1 .last:hover::after {
+    opacity: 0 !important;
+    animation: none !important;
+  }
+
+  /* Disable project card hover */
+  .project-card:hover {
+    background: none;
+    color: var(--fg);
+    padding-left: 2rem;
+  }
+  .project-card:hover .project-num {
+    color: var(--dim);
+  }
+  .project-card:hover .project-info h4 {
+    color: var(--fg);
+  }
+  .project-card:hover .project-tags span {
+    color: var(--fg);
+  }
+
+  /* Disable blog card hover */
+  .blog-card:hover {
+    background: none;
+    color: var(--fg);
+  }
+  .blog-card:hover .blog-card-body h4 {
+    color: var(--fg);
+  }
+  .blog-card:hover .blog-card-tags span {
+    color: var(--fg);
+  }
+
+  /* Disable role tag hover */
+  .role-tag:hover {
+    color: var(--fg);
+    border-top-color: var(--fg);
+    transform: none;
+  }
+  .role-tag.accent:hover {
+    color: var(--accent);
+    border-top-color: var(--accent);
+  }
+
+  /* Disable skill tag hover */
+  .skill-tag:hover {
+    color: var(--fg);
+    opacity: 0.75;
+  }
+
+  /* Hide CRT overlay entirely on touch */
+  body::before {
+    display: none;
+  }
+}
+
+/* ── RESPONSIVE: MOBILE ── */
+@media (max-width: 768px) {
+  body {
+    cursor: auto;
+  }
+  .cursor,
+  .cursor-trail {
+    display: none;
+  }
+  body::before {
+    opacity: 0.15;
+  }
+}

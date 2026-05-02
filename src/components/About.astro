@@ -1,0 +1,134 @@
+---
+/* About section — two-column brutalist grid with CV download */
+---
+
+<section class="about" id="about">
+  <div class="about-label">
+    <span class="label-text">About</span>
+    <a href="/resume.pdf" target="_blank" rel="noopener" class="cv-link">
+      [CV ↓]
+    </a>
+  </div>
+  <div class="about-content">
+    <h2 class="reveal">Code. Math. Markets. Always learning.</h2>
+    <p class="reveal reveal-delay-1">
+      I hold an Associate Degree in Software Development from Spain, where I
+      built a foundation in algorithms, data structures, and systems design.
+      That formal grounding paired with relentless self-study drives how I
+      approach every problem: decompose, model, ship.
+    </p>
+    <p class="reveal reveal-delay-2">
+      My work spans from low-level systems programming to applied machine
+      learning. I'm drawn to problems that demand both mathematical rigor and
+      pragmatic engineering — whether that's distributed consensus protocols,
+      type-theory explorations, or production ML pipelines.
+    </p>
+  </div>
+</section>
+
+<style>
+  .about {
+    padding: 0;
+    border-top: var(--border);
+    max-width: 1500px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 0;
+    border-left: var(--border);
+    border-right: var(--border);
+  }
+
+  /* ── Label column ── */
+  .about-label {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+    color: var(--fg);
+    padding: 3rem 2rem;
+    border-right: var(--border);
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 2rem;
+  }
+
+  .about-label::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: var(--accent);
+  }
+
+  .cv-link {
+    color: var(--fg);
+    text-decoration: none;
+    border: 2px solid var(--dim);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: border-color 0.2s, color 0.2s;
+    width: fit-content;
+  }
+
+  .cv-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ── Content column ── */
+  .about-content {
+    padding: 3rem 2rem;
+  }
+
+  .about-content h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4.5vw, 4rem);
+    line-height: 1.05;
+    margin-bottom: 2.5rem;
+    text-transform: uppercase;
+    max-width: 22ch;
+    font-weight: 700;
+  }
+
+  .about-content p {
+    font-size: 1rem;
+    max-width: 60ch;
+    opacity: 0.75;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .about {
+      grid-template-columns: 1fr;
+      border-left: none;
+      border-right: none;
+    }
+
+    .about-label {
+      border-right: none;
+      border-bottom: var(--border);
+      position: static;
+      height: auto;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .about-label::after {
+      display: none;
+    }
+
+    .about-content h2 {
+      font-size: clamp(1.6rem, 7vw, 3rem);
+    }
+  }
+</style>

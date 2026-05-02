@@ -1,0 +1,229 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Ignacio Gonzalez Secadas — Software Developer & AI Engineer' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="cursor"></div>
+    <div class="cursor-trail"></div>
+
+    <nav class="nav">
+      <a href="/" class="nav-logo">
+        <span class="nav-logo-accent">◼</span>
+        <span>igs</span>
+      </a>
+      <div class="nav-links">
+        <a href="/#hero">home</a>
+        <a href="/#about">about</a>
+        <a href="/#projects">projects</a>
+        <a href="/blog">blog</a>
+      </div>
+    </nav>
+
+    <slot />
+
+    <script>
+      // Custom cursor tracking
+      const cursor = document.querySelector('.cursor') as HTMLElement;
+      const trail = document.querySelector('.cursor-trail') as HTMLElement;
+
+      if (cursor && trail) {
+        let mouseX = 0;
+        let mouseY = 0;
+        let trailX = 0;
+        let trailY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+          cursor.style.left = mouseX + 'px';
+          cursor.style.top = mouseY + 'px';
+        });
+
+        function animateTrail() {
+          trailX += (mouseX - trailX) * 0.15;
+          trailY += (mouseY - trailY) * 0.15;
+          trail.style.left = trailX + 'px';
+          trail.style.top = trailY + 'px';
+          requestAnimationFrame(animateTrail);
+        }
+        animateTrail();
+
+        // Cursor hover effect on interactive elements
+        document.querySelectorAll('a, button, .role-tag, .project-card').forEach((el) => {
+          el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+          el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+      }
+
+      // Scroll reveal — one-shot IntersectionObserver
+      const revealEls = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
+      );
+      revealEls.forEach((el) => observer.observe(el));
+
+      // Active nav link highlighting based on scroll
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-links a');
+
+      function highlightNav() {
+        const scrollY = window.scrollY + 120;
+        sections.forEach((section) => {
+          const htmlSection = section as HTMLElement;
+          const top = htmlSection.offsetTop;
+          const height = htmlSection.offsetHeight;
+          const id = section.getAttribute('id');
+          if (scrollY >= top && scrollY < top + height) {
+            navLinks.forEach((link) => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === `/#${id}`) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }
+
+      window.addEventListener('scroll', highlightNav);
+      highlightNav();
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.1rem 2rem;
+    background: var(--bg);
+    border-bottom: var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--fg);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    transition: color 0.2s;
+  }
+
+  .nav-logo-accent {
+    color: var(--accent);
+    font-size: 0.7rem;
+    line-height: 1;
+  }
+
+  .nav-logo:hover {
+    color: var(--accent);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.2rem;
+  }
+
+  .nav-links a {
+    color: var(--fg);
+    text-decoration: none;
+    opacity: 0.55;
+    transition: opacity 0.2s, color 0.2s, transform 0.2s;
+    position: relative;
+  }
+
+  .nav-links a::before {
+    content: '';
+    position: absolute;
+    left: -0.7rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .nav-links a:hover {
+    opacity: 1;
+    color: var(--accent);
+    transform: translateX(3px);
+  }
+
+  .nav-links a.active {
+    opacity: 1;
+    color: var(--fg);
+  }
+
+  .nav-links a.active::before {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .nav {
+      padding: 0.9rem 1rem;
+      font-size: 0.8rem;
+    }
+
+    .nav-links {
+      gap: 1.2rem;
+    }
+
+    .nav-links a::before {
+      display: none;
+    }
+
+    .nav-links a:hover {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .nav {
+      padding: 0.7rem 0.8rem;
+      font-size: 0.75rem;
+    }
+
+    .nav-links {
+      gap: 0.9rem;
+    }
+  }
+</style>

@@ -1,0 +1,180 @@
+---
+---
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-greeting">
+      <span class="prompt">></span>
+      <span class="greeting-text">contact</span>
+    </div>
+  </div>
+
+  <div class="footer-grid">
+    <div class="footer-col">
+      <span class="col-label">Connect</span>
+      <a href="https://github.com/ignacio-gs" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/ignacio-gs" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:ignacio@example.com">Email</a>
+    </div>
+
+    <div class="footer-col">
+      <span class="col-label">Read</span>
+      <a href="/blog">Blog</a>
+      <a href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </div>
+
+    <div class="footer-col">
+      <span class="col-label">Navigate</span>
+      <a href="/#hero">Home</a>
+      <a href="/#about">About</a>
+      <a href="/#projects">Projects</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>&copy; 2026 Ignacio Gonzalez Secadas</span>
+    <span class="footer-made">Built with Astro. Hosted on GitHub Pages.</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: var(--border);
+    max-width: 1500px;
+    margin: 0 auto;
+    width: 100%;
+    border-left: var(--border);
+    border-right: var(--border);
+    padding: 4rem 2rem 2rem;
+  }
+
+  /* ── Greeting ── */
+  .footer-top {
+    margin-bottom: 3rem;
+  }
+
+  .footer-greeting {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .prompt {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .greeting-text {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--fg);
+  }
+
+  /* ── Grid ── */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    border-top: 2px solid var(--dim);
+    padding-top: 2.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .col-label {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: lowercase;
+    color: var(--fg);
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+  }
+
+  .footer-col a {
+    color: var(--fg);
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-family: var(--font-mono);
+    opacity: 0.55;
+    transition: opacity 0.2s, color 0.2s;
+    width: fit-content;
+    position: relative;
+  }
+
+  .footer-col a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+
+  .footer-col a:hover {
+    opacity: 1;
+    color: var(--accent);
+  }
+
+  .footer-col a:hover::after {
+    width: 100%;
+  }
+
+  /* ── Bottom bar ── */
+  .footer-bottom {
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--dim);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    opacity: 0.35;
+  }
+
+  .footer-made {
+    text-align: right;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .footer {
+      border-left: none;
+      border-right: none;
+      padding: 3rem 1.5rem 1.5rem;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem 1.5rem;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      gap: 0.4rem;
+      align-items: flex-start;
+    }
+
+    .footer-made {
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,144 @@
+---
+/* Skills section — Languages & DevOps in brutalist tag layout */
+---
+
+<section class="skills" id="skills">
+  <div class="skills-header reveal">
+    <h3>Skills</h3>
+    <span>02 domains</span>
+  </div>
+
+  <div class="skills-grid">
+    <!-- Languages column -->
+    <div class="skills-col">
+      <div class="skills-col-label reveal">Languages</div>
+      <div class="skills-tags reveal reveal-delay-1">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">C++</span>
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">SQL</span>
+      </div>
+    </div>
+
+    <!-- DevOps column -->
+    <div class="skills-col">
+      <div class="skills-col-label reveal reveal-delay-1">DevOps</div>
+      <div class="skills-tags reveal reveal-delay-2">
+        <span class="skill-tag">Linux</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">Kubernetes</span>
+        <span class="skill-tag">AWS</span>
+        <span class="skill-tag">VPS Hosting</span>
+        <span class="skill-tag">GitHub Workflows</span>
+        <span class="skill-tag">Git</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills {
+    border-top: var(--border);
+    max-width: 1500px;
+    margin: 0 auto;
+    width: 100%;
+    border-left: var(--border);
+    border-right: var(--border);
+  }
+
+  /* ── Header ── */
+  .skills-header {
+    padding: 2rem;
+    border-bottom: var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .skills-header h3 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+    color: var(--fg);
+  }
+
+  .skills-header span {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    opacity: 0.4;
+  }
+
+  /* ── Grid ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .skills-col {
+    padding: 2.5rem 2rem;
+  }
+
+  .skills-col:first-child {
+    border-right: var(--border);
+  }
+
+  .skills-col-label {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: normal;
+    text-transform: lowercase;
+    margin-bottom: 1.5rem;
+    color: var(--fg);
+    opacity: 0.5;
+  }
+
+  /* ── Tags ── */
+  .skills-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem 0.8rem;
+  }
+
+  .skill-tag {
+    font-size: 1rem;
+    font-family: var(--font-mono);
+    opacity: 0.75;
+    transition: opacity 0.2s, color 0.2s;
+  }
+
+  .skill-tag:hover {
+    opacity: 1;
+    color: var(--accent);
+  }
+
+  .skill-tag:not(:last-child)::after {
+    content: '/';
+    margin-left: 0.8rem;
+    opacity: 0.3;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .skills {
+      border-left: none;
+      border-right: none;
+    }
+
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .skills-col:first-child {
+      border-right: none;
+      border-bottom: var(--border);
+    }
+
+    .skill-tag {
+      font-size: 0.9rem;
+    }
+  }
+</style>

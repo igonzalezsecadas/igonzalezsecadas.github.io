@@ -1,0 +1,196 @@
+---
+/* Projects section — three brutalist project cards */
+---
+
+<section class="projects" id="projects">
+  <div class="projects-header reveal">
+    <h3>Projects</h3>
+    <span>03</span>
+  </div>
+
+  <div class="project-card reveal">
+    <span class="project-num">01</span>
+    <div class="project-info">
+      <h4>Face Detection System</h4>
+      <p>Distributed face recognition service</p>
+    </div>
+    <div class="project-tags">
+      <span>Docker</span>
+      <span>AI/ML</span>
+      <span>DevOps</span>
+    </div>
+  </div>
+
+  <div class="project-card reveal reveal-delay-1">
+    <span class="project-num">02</span>
+    <div class="project-info">
+      <h4>FPMaxxing</h4>
+      <p>Website for FP students in Spain</p>
+    </div>
+    <div class="project-tags">
+      <span>Full Stack</span>
+      <span>DevOps</span>
+    </div>
+  </div>
+
+  <div class="project-card reveal reveal-delay-2">
+    <span class="project-num">03</span>
+    <div class="project-info">
+      <h4>STime</h4>
+      <p>.NET MAUI mobile app port</p>
+    </div>
+    <div class="project-tags">
+      <span>.NET MAUI</span>
+      <span>Mobile</span>
+      <span class="wip">In Progress</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects {
+    border-top: var(--border);
+    max-width: 1500px;
+    margin: 0 auto;
+    width: 100%;
+    border-left: var(--border);
+    border-right: var(--border);
+  }
+
+  /* ── Header ── */
+  .projects-header {
+    padding: 2rem;
+    border-bottom: var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .projects-header h3 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+    color: var(--fg);
+  }
+
+  .projects-header span {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    opacity: 0.4;
+  }
+
+  /* ── Cards ── */
+  .project-card {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 2rem;
+    padding: 2rem;
+    border-bottom: var(--border);
+    align-items: center;
+    transition: background 0.2s, padding-left 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card:last-child {
+    border-bottom: none;
+  }
+
+  .project-card:hover {
+    background: var(--fg);
+    color: var(--bg);
+    padding-left: 2.5rem;
+  }
+
+  .project-num {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--dim);
+    line-height: 1;
+    transition: color 0.3s;
+  }
+
+  .project-card:hover .project-num {
+    color: var(--bg);
+    opacity: 0.25;
+  }
+
+  .project-card:hover .project-info h4 {
+    color: var(--bg);
+  }
+
+  .project-card:hover .project-info p {
+    color: var(--bg);
+    opacity: 0.6;
+  }
+
+  .project-info h4 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+  }
+
+  .project-info p {
+    font-size: 0.8rem;
+    opacity: 0.5;
+    line-height: 1.5;
+  }
+
+  /* ── Tags ── */
+  .project-tags {
+    display: flex;
+    gap: 0.2rem 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .project-tags span {
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    opacity: 0.6;
+    transition: opacity 0.3s, color 0.3s;
+  }
+
+  .project-tags span:not(:last-child)::after {
+    content: '/';
+    margin-left: 0.6rem;
+    opacity: 0.3;
+  }
+
+  .project-card:hover .project-tags span {
+    color: var(--bg);
+    opacity: 0.8;
+  }
+
+  /* ── WIP badge ── */
+  .project-tags .wip {
+    color: var(--accent);
+    opacity: 1;
+  }
+
+  .project-card:hover .project-tags .wip {
+    color: var(--bg);
+    opacity: 1;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .projects {
+      border-left: none;
+      border-right: none;
+    }
+
+    .project-card {
+      grid-template-columns: 50px 1fr;
+    }
+
+    .project-tags {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,324 @@
+---
+/* Hero section — full viewport, CSS-only animations */
+---
+
+<section class="hero" id="hero">
+  <div class="hero-grid">
+    <!-- Label bar -->
+    <div class="hero-label">
+      <span>Portfolio / 2025 <span class="typing-cursor"></span></span>
+      <span class="label-dots">◼◼◼◼</span>
+    </div>
+
+    <!-- Name -->
+    <div class="hero-name">
+      <h1>
+        <span class="first">Ignacio</span>
+        <span class="last" data-text="Gonzalez Secadas">Gonzalez Secadas</span>
+      </h1>
+    </div>
+
+    <!-- Role tags -->
+    <div class="hero-roles">
+      <span class="role-tag">Software Developer</span>
+      <span class="role-tag accent">AI Engineer</span>
+    </div>
+
+    <!-- Footer bar -->
+    <div class="hero-footer">
+      <span>Spain / ES</span>
+      <a href="#about">Scroll down ↓</a>
+    </div>
+  </div>
+
+  <!-- Ticker strip -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span>/// SYSTEM ONLINE</span> IGNACIO GONZALEZ SECADAS <span>/// SOFTWARE DEVELOPER</span> SYSTEMS THINKER <span>/// BUILDING SINCE 2026</span> RIGOROUS THINKING <span>/// COMPILED WITH CARE</span> NO CEREMONY <span>/// STRUCTURE FIRST</span>
+      <span>/// SYSTEM ONLINE</span> IGNACIO GONZALEZ SECADAS <span>/// SOFTWARE DEVELOPER</span> SYSTEMS THINKER <span>/// BUILDING SINCE 2026</span> RIGOROUS THINKING <span>/// COMPILED WITH CARE</span> NO CEREMONY <span>/// STRUCTURE FIRST</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .hero-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 0;
+    max-width: 1500px;
+    margin: 0 auto;
+    width: 100%;
+    border-left: var(--border);
+    border-right: var(--border);
+  }
+
+  /* ── Label bar ── */
+  .hero-label {
+    grid-column: 1 / -1;
+    border-bottom: var(--border);
+    padding: 1.2rem 2rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .typing-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 1em;
+    background: var(--accent);
+    margin-left: 4px;
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .label-dots {
+    letter-spacing: 0.15em;
+  }
+
+  /* ── Name ── */
+  .hero-name {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: var(--border);
+    position: relative;
+  }
+
+  .hero-name::before {
+    content: '◼';
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    color: var(--accent);
+    font-size: 0.8rem;
+    animation: blink 1.2s step-end infinite;
+  }
+
+  .hero-name h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    font-weight: 800;
+    line-height: 0.88;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+
+  .hero-name h1 .first {
+    display: block;
+  }
+
+  .hero-name h1 .last {
+    display: block;
+    color: transparent;
+    -webkit-text-stroke: 2.5px var(--accent);
+    position: relative;
+  }
+
+  /* Glitch pseudo-elements — auto-play on load */
+  .hero-name h1 .last::before,
+  .hero-name h1 .last::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-text-stroke: 0;
+  }
+
+  .hero-name h1 .last::before {
+    color: var(--accent);
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+    opacity: 0;
+    animation: glitch 6s infinite linear;
+  }
+
+  .hero-name h1 .last::after {
+    color: var(--fg);
+    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+    opacity: 0;
+    animation: glitch 6s infinite linear;
+  }
+
+  @keyframes glitch {
+    0%, 94%, 100% { transform: translate(0); opacity: 0; }
+    95% { transform: translate(-4px, 1px); opacity: 0.8; }
+    96% { transform: translate(3px, -1px); opacity: 0.5; }
+    97% { transform: translate(-2px, 2px); opacity: 0.8; }
+    98% { transform: translate(2px, -2px); opacity: 0.5; }
+    99% { transform: translate(0); opacity: 0; }
+  }
+
+  /* Auto-play subtle pulse on label dots */
+  .label-dots {
+    letter-spacing: 0.15em;
+    animation: dots-pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes dots-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* ── Role tags ── */
+  .hero-roles {
+    grid-column: 2;
+    grid-row: 2;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2.5rem;
+  }
+
+  .role-tag {
+    font-size: 1.4rem;
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+    width: fit-content;
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+    border-top: 3px solid var(--fg);
+    padding-top: 0.6rem;
+    transition: all 0.15s ease;
+    /* Entrance animation */
+    opacity: 0;
+    transform: translateX(40px);
+    animation: role-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .role-tag:nth-child(1) { animation-delay: 0.6s; }
+  .role-tag:nth-child(2) { animation-delay: 0.85s; }
+
+  @keyframes role-enter {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .role-tag:hover {
+    color: var(--accent);
+    border-top-color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  .role-tag.accent {
+    color: var(--accent);
+    border-top-color: var(--accent);
+  }
+
+  .role-tag.accent:hover {
+    color: var(--fg);
+    border-top-color: var(--fg);
+  }
+
+  /* ── Footer bar ── */
+  .hero-footer {
+    grid-column: 1 / -1;
+    border-top: var(--border);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .hero-footer a {
+    color: var(--fg);
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 2px;
+    transition: color 0.2s;
+  }
+
+  .hero-footer a:hover {
+    color: var(--accent);
+  }
+
+  /* ── Ticker ── */
+  .ticker {
+    border-top: var(--border);
+    border-bottom: var(--border);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0.6rem 0;
+    background: var(--dim);
+  }
+
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker-scroll 20s linear infinite;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  .ticker:hover .ticker-inner {
+    animation-play-state: paused;
+  }
+
+  .ticker-inner span {
+    margin-right: 4rem;
+    color: var(--accent);
+  }
+
+  @keyframes ticker-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      border: none;
+    }
+
+    .hero-name {
+      border-right: none;
+      border-bottom: var(--border);
+    }
+
+    .hero-name h1 {
+      font-size: clamp(2.5rem, 12vw, 4.5rem);
+    }
+
+    .hero-roles {
+      padding: 2rem;
+      gap: 1.5rem;
+    }
+
+    .role-tag {
+      font-size: 1.1rem;
+      padding-top: 0.5rem;
+    }
+
+
+  }
+</style>
