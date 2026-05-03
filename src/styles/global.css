@@ -25,6 +25,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 70px;
 }
 
 body {
@@ -78,21 +79,71 @@ body {
   }
 }
 
-/* ── CRT SCANLINE OVERLAY ── */
+/* ═══════════════════════════════════════════
+   CRT MONITOR EFFECTS
+   ═══════════════════════════════════════════ */
+
+/* ── Layer 1: Scanlines ── */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   background: repeating-linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.15) 0px,
-    rgba(0, 0, 0, 0.15) 1px,
+    rgba(0, 0, 0, 0.22) 0px,
+    rgba(0, 0, 0, 0.22) 1px,
     transparent 1px,
-    transparent 3px
+    transparent 4px
   );
   pointer-events: none;
   z-index: 999;
-  opacity: 0.35;
+  opacity: 0.45;
+}
+
+/* ── Layer 2: Vignette (screen curvature) ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 55%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  pointer-events: none;
+  z-index: 998;
+}
+
+/* ── Layer 3: Subtle screen flicker ── */
+.crt-flicker {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  pointer-events: none;
+  z-index: 997;
+  animation: crt-flicker 0.15s infinite;
+}
+
+@keyframes crt-flicker {
+  0%   { opacity: 0.97; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.98; }
+}
+
+/* ── Phosphor glow on headings ── */
+h1, h2, h3, h4 {
+  text-shadow:
+    0 0 20px rgba(32, 201, 151, 0.08),
+    0 0 40px rgba(32, 201, 151, 0.04);
+}
+
+/* ── Subtle RGB color bleed on large text ── */
+.hero-name h1 .last {
+  text-shadow:
+    -1px 0 0 rgba(255, 0, 0, 0.15),
+    1px 0 0 rgba(0, 255, 255, 0.15),
+    0 0 30px rgba(32, 201, 151, 0.12);
 }
 
 /* ── SCROLL REVEAL ── */
@@ -172,8 +223,15 @@ body::before {
   }
 
   /* Hide CRT overlay entirely on touch */
-  body::before {
-    display: none;
+  body::before,
+  body::after,
+  .crt-flicker {
+    display: none !important;
+  }
+
+  h1, h2, h3, h4,
+  .hero-name h1 .last {
+    text-shadow: none !important;
   }
 }
 
@@ -186,7 +244,15 @@ body::before {
   .cursor-trail {
     display: none;
   }
-  body::before {
+  body::before,
+  body::after {
     opacity: 0.15;
+  }
+  .crt-flicker {
+    display: none;
+  }
+  h1, h2, h3, h4,
+  .hero-name h1 .last {
+    text-shadow: none;
   }
 }

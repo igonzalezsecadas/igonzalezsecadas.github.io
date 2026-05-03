@@ -20,8 +20,8 @@
 
     <!-- Role tags -->
     <div class="hero-roles">
-      <span class="role-tag">Software Developer</span>
-      <span class="role-tag accent">AI Engineer</span>
+      <span class="role-tag">software developer</span>
+      <span class="role-tag accent">ai engineer</span>
     </div>
 
     <!-- Footer bar -->
@@ -31,13 +31,6 @@
     </div>
   </div>
 
-  <!-- Ticker strip -->
-  <div class="ticker">
-    <div class="ticker-inner">
-      <span>/// SYSTEM ONLINE</span> IGNACIO GONZALEZ SECADAS <span>/// SOFTWARE DEVELOPER</span> SYSTEMS THINKER <span>/// BUILDING SINCE 2026</span> RIGOROUS THINKING <span>/// COMPILED WITH CARE</span> NO CEREMONY <span>/// STRUCTURE FIRST</span>
-      <span>/// SYSTEM ONLINE</span> IGNACIO GONZALEZ SECADAS <span>/// SOFTWARE DEVELOPER</span> SYSTEMS THINKER <span>/// BUILDING SINCE 2026</span> RIGOROUS THINKING <span>/// COMPILED WITH CARE</span> NO CEREMONY <span>/// STRUCTURE FIRST</span>
-    </div>
-  </div>
 </section>
 
 <style>
@@ -51,10 +44,10 @@
   .hero-grid {
     flex: 1;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 3fr 1fr;
     grid-template-rows: auto 1fr auto;
     gap: 0;
-    max-width: 1500px;
+    max-width: 1200px;
     margin: 0 auto;
     width: 100%;
     border-left: var(--border);
@@ -97,7 +90,7 @@
   .hero-name {
     grid-column: 1;
     grid-row: 2;
-    padding: 3rem 2rem;
+    padding: 3rem 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -117,7 +110,9 @@
 
   .hero-name h1 {
     font-family: var(--font-heading);
-    font-size: clamp(3.5rem, 9vw, 8rem);
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    overflow-wrap: break-word;
+    word-break: break-word;
     font-weight: 800;
     line-height: 0.88;
     letter-spacing: -0.03em;
@@ -185,7 +180,7 @@
   .hero-roles {
     grid-column: 2;
     grid-row: 2;
-    padding: 3rem 2rem;
+    padding: 3rem 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -200,6 +195,7 @@
     width: fit-content;
     font-family: var(--font-heading);
     letter-spacing: -0.02em;
+    text-transform: lowercase;
     border-top: 3px solid var(--fg);
     padding-top: 0.6rem;
     transition: all 0.15s ease;
@@ -258,39 +254,6 @@
 
   .hero-footer a:hover {
     color: var(--accent);
-  }
-
-  /* ── Ticker ── */
-  .ticker {
-    border-top: var(--border);
-    border-bottom: var(--border);
-    overflow: hidden;
-    white-space: nowrap;
-    padding: 0.6rem 0;
-    background: var(--dim);
-  }
-
-  .ticker-inner {
-    display: inline-block;
-    animation: ticker-scroll 20s linear infinite;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-  }
-
-  .ticker:hover .ticker-inner {
-    animation-play-state: paused;
-  }
-
-  .ticker-inner span {
-    margin-right: 4rem;
-    color: var(--accent);
-  }
-
-  @keyframes ticker-scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
   }
 
   /* ── Responsive ── */
