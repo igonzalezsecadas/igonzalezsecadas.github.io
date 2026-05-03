@@ -4,8 +4,7 @@
 
 <section class="skills" id="skills">
   <div class="skills-header reveal">
-    <h3>Skills</h3>
-    <span>02 domains</span>
+    <h2>Skills</h2>
   </div>
 
   <div class="skills-grid">
@@ -55,13 +54,22 @@
     align-items: center;
   }
 
-  .skills-header h3 {
+  .skills-header h2 {
     font-family: var(--font-heading);
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: -0.02em;
     text-transform: lowercase;
     color: var(--fg);
+  }
+
+  .skills-header h2::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 3px;
+    background: var(--accent);
+    margin-top: 0.5rem;
   }
 
   .skills-header span {

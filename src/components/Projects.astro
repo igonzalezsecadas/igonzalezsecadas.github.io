@@ -4,15 +4,14 @@
 
 <section class="projects" id="projects">
   <div class="projects-header reveal">
-    <h3>Projects</h3>
-    <span>03</span>
+    	<h2>Projects</h2>
   </div>
 
   <div class="project-card reveal">
     <span class="project-num">01</span>
     <div class="project-info">
-      <h4>Face Detection System</h4>
-      <p>Distributed face recognition service</p>
+      <h3>Face Detection System</h3>
+			<p>Distributed face recognition service, simulated with orchestration of docker containers. (Technical write-up)</p>
     </div>
     <div class="project-tags">
       <span>Docker</span>
@@ -24,20 +23,21 @@
   <div class="project-card reveal reveal-delay-1">
     <span class="project-num">02</span>
     <div class="project-info">
-      <h4>FPMaxxing</h4>
-      <p>Website for FP students in Spain</p>
+      <h3>FPMaxxing</h3>
+			<p>Website with resources to help DAM/DAW students in Spain to bridge the gap between school and tech industry.</p>
     </div>
     <div class="project-tags">
       <span>Full Stack</span>
-      <span>DevOps</span>
+			<span>DevOps</span>
+			<span class="wip">In progress</span>
     </div>
   </div>
 
   <div class="project-card reveal reveal-delay-2">
     <span class="project-num">03</span>
     <div class="project-info">
-      <h4>STime</h4>
-      <p>.NET MAUI mobile app port</p>
+      <h3>STime</h3>
+      <p>.NET MAUI mobile app port. Internship project.</p>
     </div>
     <div class="project-tags">
       <span>.NET MAUI</span>
@@ -66,13 +66,22 @@
     align-items: center;
   }
 
-  .projects-header h3 {
+  .projects-header h2 {
     font-family: var(--font-heading);
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: -0.02em;
     text-transform: lowercase;
     color: var(--fg);
+  }
+
+  .projects-header h2::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 3px;
+    background: var(--accent);
+    margin-top: 0.5rem;
   }
 
   .projects-header span {
@@ -118,7 +127,7 @@
     opacity: 0.25;
   }
 
-  .project-card:hover .project-info h4 {
+  .project-card:hover .project-info h3 {
     color: var(--bg);
   }
 
@@ -127,7 +136,7 @@
     opacity: 0.6;
   }
 
-  .project-info h4 {
+  .project-info h3 {
     font-family: var(--font-heading);
     font-size: 1.1rem;
     font-weight: 700;

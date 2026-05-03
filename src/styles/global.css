@@ -163,6 +163,15 @@ h1, h2, h3, h4 {
 .reveal-delay-2 { transition-delay: 0.3s; }
 .reveal-delay-3 { transition-delay: 0.45s; }
 
+/* ── SECTION HEADING PROMPT ── */
+.prompt {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  color: var(--accent);
+  line-height: 1;
+  user-select: none;
+}
+
 /* ── BLINK ANIMATION ── */
 @keyframes blink {
   50% { opacity: 0; }

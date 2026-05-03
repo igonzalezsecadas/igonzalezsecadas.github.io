@@ -9,9 +9,8 @@ if (posts.length === 0) return;
 ---
 
 <section class="blog-previews" id="blog">
-  <div class="blog-header reveal">
-    <h3>Blog</h3>
-    <span>{String(posts.length).padStart(2, '0')}</span>
+	<div class="blog-header reveal">
+		<h2>Blog</h2>
   </div>
 
   <div class="blog-grid">
@@ -23,7 +22,7 @@ if (posts.length === 0) return;
           </time>
         </div>
         <div class="blog-card-body">
-          <h4>{post.data.title}</h4>
+          <h3>{post.data.title}</h3>
           <p>{post.data.description}</p>
         </div>
         {post.data.tags && post.data.tags.length > 0 && (
@@ -58,13 +57,22 @@ if (posts.length === 0) return;
     align-items: center;
   }
 
-  .blog-header h3 {
+  .blog-header h2 {
     font-family: var(--font-heading);
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: -0.02em;
     text-transform: lowercase;
     color: var(--fg);
+  }
+
+  .blog-header h2::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 3px;
+    background: var(--accent);
+    margin-top: 0.5rem;
   }
 
   .blog-header span {
@@ -107,7 +115,7 @@ if (posts.length === 0) return;
     text-transform: uppercase;
   }
 
-  .blog-card-body h4 {
+  .blog-card-body h3 {
     font-family: var(--font-heading);
     font-size: 1rem;
     font-weight: 700;
@@ -117,7 +125,7 @@ if (posts.length === 0) return;
     transition: color 0.3s;
   }
 
-  .blog-card:hover .blog-card-body h4 {
+  .blog-card:hover .blog-card-body h3 {
     color: var(--bg);
   }
 

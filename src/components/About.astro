@@ -6,22 +6,17 @@
   <div class="about-label">
     <span class="label-text">About</span>
     <a href="/resume.pdf" target="_blank" rel="noopener" class="cv-link">
-      [CV ↓]
+      CV ↓
     </a>
   </div>
   <div class="about-content">
-    <h2 class="reveal">Code. Math. Markets. Always learning.</h2>
+    <h2 class="reveal">Code. Math. Finance. Always learning.</h2>
     <p class="reveal reveal-delay-1">
-      I hold an Associate Degree in Software Development from Spain, where I
-      built a foundation in algorithms, data structures, and systems design.
-      That formal grounding paired with relentless self-study drives how I
-      approach every problem: decompose, model, ship.
+      I hold an Associate Degree in Software Development from Spain, but apart from that I have teached myself many
+			concepts beyound that, like AI/ML, some systems programming and the basis of real time and live trading systems.
     </p>
     <p class="reveal reveal-delay-2">
-      My work spans from low-level systems programming to applied machine
-      learning. I'm drawn to problems that demand both mathematical rigor and
-      pragmatic engineering — whether that's distributed consensus protocols,
-      type-theory explorations, or production ML pipelines.
+      I am drawn to complex problems and to many other areas of knowledge, specially economics, math, finance and Spanish history.
     </p>
   </div>
 </section>
@@ -69,9 +64,9 @@
   .cv-link {
     color: var(--fg);
     text-decoration: none;
-    border: 2px solid var(--dim);
-    padding: 0.4rem 0.8rem;
-    font-size: 0.6rem;
+		border: 2px solid var(--accent);
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     transition: border-color 0.2s, color 0.2s;
@@ -96,6 +91,15 @@
     text-transform: uppercase;
     max-width: 22ch;
     font-weight: 700;
+  }
+
+  .about-content h2::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 3px;
+    background: var(--accent);
+    margin-top: 0.75rem;
   }
 
   .about-content p {
