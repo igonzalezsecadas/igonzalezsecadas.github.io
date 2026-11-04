@@ -81,5 +81,6 @@ table.proyectos {
 
 .separador { text-align: center; word-spacing: 0.8em; margin: 4px 0 8px; }
 small { color: var(--suave); }
+.pie { text-align: center; }
 
 .contacto p { margin-bottom: 6px; }
